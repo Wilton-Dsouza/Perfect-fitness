@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "537902459158",
+    "firebase_url": "https://perfect-fitness-back-default-rtdb.firebaseio.com",
+    "project_id": "perfect-fitness-back",
+    "storage_bucket": "perfect-fitness-back.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537902459158:android:a704f3cb62c37a94710837",
+        "android_client_info": {
+          "package_name": "com.example.perfect_fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537902459158-opgqr89bb0u5ken2rsjmdsh1pbnnqu12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8nDjwGjaS6Tbw_h7qGyU_igBFl7eONqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537902459158-opgqr89bb0u5ken2rsjmdsh1pbnnqu12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
