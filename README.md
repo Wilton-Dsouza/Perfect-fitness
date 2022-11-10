@@ -1,16 +1,7 @@
-# Perfect_fitness
+## Perfect Fitness
+Perfect Fitness is a fitness app that aims to keep you fit and healthy and make your lifestyle healthier by tracking your food intake, water intake and workout pattern.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Technologies used is:
+- Flutter/Dart
+- Firebase
+- Flutter Secure Storage
