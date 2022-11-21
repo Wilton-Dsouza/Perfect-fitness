@@ -95,6 +95,8 @@ class WorkoutCard extends StatelessWidget {
                                   ColorConstants.primaryColor.withOpacity(0.12),
                               lineHeight: 6,
                               padding: EdgeInsets.zero,
+                              animation: true,
+                              animationDuration: 1000,
                             ),
                           )
                         ],
