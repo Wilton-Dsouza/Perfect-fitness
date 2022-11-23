@@ -7,9 +7,13 @@ import 'package:perfect_fitness/core/const/text_constants.dart';
 import 'package:perfect_fitness/screens/workouts/bloc/workouts_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WorkoutContent extends StatelessWidget {
+class WorkoutContent extends StatefulWidget {
   WorkoutContent({Key? key}) : super(key: key);
+  @override
+  _WorkoutContent createState() => _WorkoutContent();
+}
 
+class _WorkoutContent extends State<WorkoutContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,32 +26,33 @@ class WorkoutContent extends StatelessWidget {
 
   Widget _createHomeBody(BuildContext context) {
     final bloc = BlocProvider.of<WorkoutsBloc>(context);
-    return BlocBuilder<WorkoutsBloc, WorkoutsState>(
-      buildWhen: (_, currState) => currState is ReloadWorkoutsState,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text(
-                  TextConstants.workouts,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Expanded(
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              TextConstants.workouts,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 5),
+          Container(
+              padding: const EdgeInsets.only(top: 5),
+              child: RefreshIndicator(
+                onRefresh: () {
+                  setState(() {});
+                  return Future<void>.delayed(Duration(seconds: 0));
+                },
                 child: ListView(
+                  shrinkWrap: true,
                   children:
                       bloc.workouts.map((e) => _createWorkoutCard(e)).toList(),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              )),
+        ],
+      ),
     );
   }
 

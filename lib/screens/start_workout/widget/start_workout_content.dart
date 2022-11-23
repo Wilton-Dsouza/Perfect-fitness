@@ -66,22 +66,18 @@ class StartWorkoutContent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, top: 8),
       child: GestureDetector(
-        child: BlocBuilder<StartWorkoutBloc, StartWorkoutState>(
-          builder: (context, state) {
-            return Row(
-              children: [
-                Image(image: AssetImage(PathConstants.back)),
-                const SizedBox(width: 17),
-                Text(
-                  TextConstants.back,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-              ],
-            );
-          },
+        child: Row(
+          children: [
+            Image(image: AssetImage(PathConstants.back)),
+            const SizedBox(width: 17),
+            Text(
+              TextConstants.back,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
         onTap: () {
-          bloc.add(BackTappedEvent());
+          Navigator.pop(context, 'true');
         },
       ),
     );
@@ -173,12 +169,12 @@ class StartWorkoutContent extends StatelessWidget {
     final bloc = BlocProvider.of<workout_bloc.WorkoutDetailsBloc>(context);
     return FitnessButton(
       title: nextExercise != null ? TextConstants.next : TextConstants.finish,
-      onTap: () async {
+      onTap: () {
         if (nextExercise != null) {
           List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
           int currentExerciseIndex = exercisesList!.indexOf(exercise);
 
-          await _saveWorkout(currentExerciseIndex);
+          _saveWorkout(currentExerciseIndex);
 
           if (currentExerciseIndex < exercisesList.length - 1) {
             bloc.add(workout_bloc.StartTappedEvent(
@@ -188,7 +184,7 @@ class StartWorkoutContent extends StatelessWidget {
             ));
           }
         } else {
-          await _saveWorkout(workout.exerciseDataList!.length - 1);
+          _saveWorkout(workout.exerciseDataList!.length - 1);
 
           Navigator.pop(context, workout);
         }

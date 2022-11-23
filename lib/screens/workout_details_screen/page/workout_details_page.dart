@@ -22,7 +22,8 @@ class WorkoutDetailsPage extends StatelessWidget {
     return BlocProvider<WorkoutDetailsBloc>(
       create: (context) => workoutDetailsBloc,
       child: BlocConsumer<WorkoutDetailsBloc, WorkoutDetailsState>(
-        buildWhen: (_, currState) => currState is WorkoutDetailsInitial,
+        buildWhen: (previousState, currState) =>
+            currState is WorkoutDetailsInitial,
         builder: (context, state) {
           final bloc = BlocProvider.of<WorkoutDetailsBloc>(context);
           bloc.add(WorkoutDetailsInitialEvent(workout: workout));
@@ -35,7 +36,7 @@ class WorkoutDetailsPage extends StatelessWidget {
                 title: workout.currentProgress == 0
                     ? TextConstants.start
                     : TextConstants.continueT,
-                onTap: () {
+                onTap: () async {
                   final index = workout.currentProgress ==
                           workout.exerciseDataList!.length
                       ? 0

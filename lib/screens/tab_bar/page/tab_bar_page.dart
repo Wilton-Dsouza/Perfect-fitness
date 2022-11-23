@@ -8,10 +8,13 @@ import 'package:perfect_fitness/screens/workouts/page/workouts_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TabBarPage extends StatelessWidget {
+class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
-
   @override
+  _TabBarPage createState() => _TabBarPage();
+}
+
+class _TabBarPage extends State<TabBarPage> {
   Widget build(BuildContext context) {
     return BlocProvider<TabBarBloc>(
       create: (BuildContext context) => TabBarBloc(),

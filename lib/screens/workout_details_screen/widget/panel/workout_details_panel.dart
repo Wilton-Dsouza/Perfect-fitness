@@ -23,7 +23,6 @@ class WorkoutDetailsPanel extends StatelessWidget {
         const SizedBox(height: 15),
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _createHeader(),
               const SizedBox(height: 20),

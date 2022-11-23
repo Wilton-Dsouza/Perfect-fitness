@@ -15,7 +15,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial());
 
   List<WorkoutData> workouts = <WorkoutData>[];
-  List<ExerciseData> exercises = <ExerciseData>[];
   int timeSent = 0;
 
   @override
@@ -64,6 +63,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   int? getTimeSent() {
+    List<ExerciseData> exercises = <ExerciseData>[];
     for (final WorkoutData workout in workouts) {
       exercises.addAll(workout.exerciseDataList!);
     }
@@ -71,6 +71,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     exercise.forEach((e) {
       timeSent += e.minutes!;
     });
+    if (timeSent > 128) {
+      timeSent = 128;
+    }
     return timeSent;
   }
 }

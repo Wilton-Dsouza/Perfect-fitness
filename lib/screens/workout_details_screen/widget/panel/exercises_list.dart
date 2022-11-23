@@ -7,30 +7,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class ExercisesList extends StatelessWidget {
+class ExercisesList extends StatefulWidget {
   final WorkoutData workout;
   final List<ExerciseData> exercises;
 
   const ExercisesList({required this.exercises, required this.workout});
+  _ExercisesList createState() => _ExercisesList();
+}
 
+class _ExercisesList extends State<ExercisesList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: EdgeInsets.only(top: 10),
-      itemCount: exercises.length,
-      itemBuilder: (context, index) {
-        return ExerciseCell(
-          currentExercise: exercises[index],
-          nextExercise:
-              index == exercises.length - 1 ? null : exercises[index + 1],
-          workout: workout,
-          index: index,
-        );
-      },
-      separatorBuilder: (context, index) {
-        return const SizedBox(height: 15);
-      },
-    );
+    return RefreshIndicator(
+        onRefresh: () {
+          setState(() {});
+          return Future<void>.delayed(Duration(seconds: 0));
+        },
+        child: ListView.separated(
+          padding: EdgeInsets.only(top: 10),
+          itemCount: widget.exercises.length,
+          itemBuilder: (context, index) {
+            return ExerciseCell(
+              currentExercise: widget.exercises[index],
+              nextExercise: index == widget.exercises.length - 1
+                  ? null
+                  : widget.exercises[index + 1],
+              workout: widget.workout,
+              index: index,
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const SizedBox(height: 15);
+          },
+        ));
   }
 }
 
@@ -50,49 +59,43 @@ class ExerciseCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<WorkoutDetailsBloc>(context);
-    return BlocBuilder<WorkoutDetailsBloc, WorkoutDetailsState>(
-      buildWhen: (_, currState) => currState is WorkoutExerciseCellTappedState,
-      builder: (context, state) {
-        return InkWell(
-          borderRadius: BorderRadius.circular(40),
-          onTap: () {
-            bloc.add(
-              StartTappedEvent(
-                workout: workout,
-                index: index,
+    return InkWell(
+        borderRadius: BorderRadius.circular(40),
+        onTap: () {
+          bloc.add(
+            StartTappedEvent(
+              workout: workout,
+              index: index,
+            ),
+          );
+        },
+        child: Container(
+          width: double.infinity,
+          padding:
+              const EdgeInsets.only(left: 10, right: 25, top: 10, bottom: 10),
+          decoration: BoxDecoration(
+            color: ColorConstants.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: ColorConstants.textBlack.withOpacity(0.12),
+                blurRadius: 5.0,
+                spreadRadius: 1.1,
               ),
-            );
-          },
-          child: Container(
-            width: double.infinity,
-            padding:
-                const EdgeInsets.only(left: 10, right: 25, top: 10, bottom: 10),
-            decoration: BoxDecoration(
-              color: ColorConstants.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: ColorConstants.textBlack.withOpacity(0.12),
-                  blurRadius: 5.0,
-                  spreadRadius: 1.1,
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                _createImage(),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _createExerciseTextInfo(),
-                ),
-                const SizedBox(width: 10),
-                _createRightArrow(),
-              ],
-            ),
+            ],
           ),
-        );
-      },
-    );
+          child: Row(
+            children: [
+              _createImage(),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _createExerciseTextInfo(),
+              ),
+              const SizedBox(width: 10),
+              _createRightArrow(),
+            ],
+          ),
+        ));
   }
 
   Widget _createExerciseTextInfo() {
