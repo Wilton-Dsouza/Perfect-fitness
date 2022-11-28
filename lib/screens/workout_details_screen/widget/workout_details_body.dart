@@ -2,6 +2,7 @@ import 'package:perfect_fitness/core/const/color_constants.dart';
 import 'package:perfect_fitness/core/const/path_constants.dart';
 import 'package:perfect_fitness/data/workout_data.dart';
 import 'package:perfect_fitness/screens/workout_details_screen/bloc/workoutdetails_bloc.dart';
+import 'package:perfect_fitness/screens/tab_bar/page/tab_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,23 +29,21 @@ class WorkoutDetailsBody extends StatelessWidget {
     final bloc = BlocProvider.of<WorkoutDetailsBloc>(context);
     return Positioned(
       child: SafeArea(
-        child: BlocBuilder<WorkoutDetailsBloc, WorkoutDetailsState>(
-          builder: (context, state) {
-            return GestureDetector(
-              child: Container(
-                width: 30,
-                height: 30,
-                child: Image(
-                  image: AssetImage(PathConstants.back),
-                ),
-              ),
-              onTap: () {
-                bloc.add(BackTappedEvent());
-              },
-            );
-          },
+          child: GestureDetector(
+        child: Container(
+          width: 30,
+          height: 30,
+          child: Image(
+            image: AssetImage(PathConstants.back),
+          ),
         ),
-      ),
+        onTap: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => TabBarPage()),
+              (route) => false);
+        },
+      )),
       left: 20,
       top: 14,
     );

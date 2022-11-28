@@ -24,7 +24,8 @@ class StartWorkoutPage extends StatelessWidget {
     return BlocProvider<StartWorkoutBloc>(
       create: (context) => StartWorkoutBloc(),
       child: BlocConsumer<StartWorkoutBloc, StartWorkoutState>(
-        buildWhen: (_, currState) => currState is StartWorkoutInitial,
+        buildWhen: (previousState, currState) =>
+            currState is StartWorkoutInitial,
         builder: (context, state) {
           final currentExercise = workout.exerciseDataList![index];
           final nextExercise = index + 1 < workout.exerciseDataList!.length

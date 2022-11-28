@@ -4,6 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:perfect_fitness/core/service/auth_service.dart';
 import 'package:perfect_fitness/core/service/validation_service.dart';
 import 'package:flutter/material.dart';
+import 'package:perfect_fitness/data/user_data.dart';
+import 'package:perfect_fitness/core/const/global_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';
@@ -31,6 +34,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           yield LoadingState();
           await AuthService.signIn(
               emailController.text, passwordController.text);
+          final currUser = FirebaseAuth.instance.currentUser;
+          GlobalConstants.currentUser = UserData.fromFirebase(currUser);
           yield NextTabBarPageState();
           print("Go to the next page");
         } catch (e) {

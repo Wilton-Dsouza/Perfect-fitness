@@ -89,6 +89,7 @@ class HomeStatistics extends StatelessWidget {
   }
 
   Widget _createColumnStatistics(HomeBloc bloc) {
+    final timespent = bloc.getTimeSent();
     return Column(
       children: [
         DataWorkouts(
@@ -101,7 +102,7 @@ class HomeStatistics extends StatelessWidget {
         DataWorkouts(
           icon: PathConstants.timeSent,
           title: TextConstants.timeSent,
-          count: bloc.getTimeSent() ?? 0,
+          count: timespent ?? 0,
           text: TextConstants.minutes,
         ),
       ],

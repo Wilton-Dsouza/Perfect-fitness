@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:perfect_fitness/core/service/auth_service.dart';
@@ -15,7 +15,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial());
 
   List<WorkoutData> workouts = <WorkoutData>[];
-  List<ExerciseData> exercises = <ExerciseData>[];
   int timeSent = 0;
 
   @override
@@ -35,7 +34,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
       yield ReloadImageState(photoURL: photoURL);
     } else if (event is ReloadDisplayNameEvent) {
-      final displayName = await UserStorageService.readSecureData('name');
+      final displayName = FirebaseAuth.instance.currentUser?.displayName;
       yield ReloadDisplayNameState(displayName: displayName);
     }
   }
@@ -64,6 +63,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   int? getTimeSent() {
+    List<ExerciseData> exercises = <ExerciseData>[];
     for (final WorkoutData workout in workouts) {
       exercises.addAll(workout.exerciseDataList!);
     }
@@ -71,6 +71,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     exercise.forEach((e) {
       timeSent += e.minutes!;
     });
+    if (timeSent > 128) {
+      timeSent = 128;
+    }
     return timeSent;
   }
 }

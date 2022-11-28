@@ -9,12 +9,13 @@ import 'package:perfect_fitness/screens/tab_bar/bloc/tab_bar_bloc.dart';
 import 'package:perfect_fitness/screens/common_widgets/fitness_button.dart';
 import 'package:perfect_fitness/screens/home/widget/home_statistics.dart';
 import 'package:perfect_fitness/data/workout_data.dart';
+import 'package:perfect_fitness/screens/tab_bar/page/tab_bar_page.dart';
 import 'package:perfect_fitness/screens/workout_details_screen/page/workout_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perfect_fitness/screens/home/widget/home_exercises_card.dart';
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   final List<WorkoutData> workouts;
 
   const HomeContent({
@@ -22,6 +23,11 @@ class HomeContent extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  _HomeContentState createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
   int getProgressPercentage() {
     List<WorkoutData> workouts = <WorkoutData>[];
     final completed = workouts
@@ -47,6 +53,15 @@ class HomeContent extends StatelessWidget {
   Widget _createHomeBody(BuildContext context) {
     final bloc = BlocProvider.of<HomeBloc>(context);
     return SafeArea(
+        child: RefreshIndicator(
+      onRefresh: () {
+        setState(() {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => TabBarPage()),
+              (route) => false);
+        });
+        return Future<void>.delayed(Duration(seconds: 5));
+      },
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 20),
         children: [
@@ -59,7 +74,7 @@ class HomeContent extends StatelessWidget {
           _createProgress(bloc),
         ],
       ),
-    );
+    ));
   }
 
   Widget _createProfileData(BuildContext context) {
@@ -116,8 +131,8 @@ class HomeContent extends StatelessWidget {
                                 width: 200,
                                 height: 120)),
                         radius: 25),
-                onTap: () async {
-                  await Navigator.of(context).push(
+                onTap: () {
+                  Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => EditAccountScreen()));
                   BlocProvider.of<HomeBloc>(context).add(ReloadImageEvent());
                 },
@@ -130,7 +145,7 @@ class HomeContent extends StatelessWidget {
   }
 
   Widget _showStartWorkout(BuildContext context, HomeBloc bloc) {
-    return workouts.isEmpty
+    return widget.workouts.isEmpty
         ? _createStartWorkout(context, bloc)
         : HomeStatistics();
   }

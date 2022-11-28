@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:perfect_fitness/data/workout_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:perfect_fitness/core/const/color_constants.dart';
 import 'package:perfect_fitness/core/const/path_constants.dart';
@@ -11,7 +11,9 @@ import 'package:perfect_fitness/screens/reminder/page/reminder_page.dart';
 import 'package:perfect_fitness/screens/settings/bloc/bloc/settings_bloc.dart';
 import 'package:perfect_fitness/screens/sign_in/page/sign_in_page.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -128,10 +130,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
                 onTap: () {
                   AuthService.signOut();
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(builder: (_) => SignInPage()),
+                  // );
                   Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => SignInPage()),
-                  );
+                      context, MaterialPageRoute(builder: (_) => SignInPage()));
                 }),
             SizedBox(height: 15),
             Text(TextConstants.joinUs,

@@ -30,7 +30,7 @@ class _MyAppState extends State {
       NotificationService.flutterLocalNotificationsPlugin;
 
   @override
-  initState() {
+  void initState() {
     super.initState();
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('app_icon');

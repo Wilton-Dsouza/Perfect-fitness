@@ -11,6 +11,7 @@ import 'package:perfect_fitness/screens/common_widgets/fitness_loading.dart';
 import 'package:perfect_fitness/screens/common_widgets/settings_container.dart';
 import 'package:perfect_fitness/screens/common_widgets/settings_textfield.dart';
 import 'package:perfect_fitness/screens/edit_account/bloc/edit_account_bloc.dart';
+import 'package:perfect_fitness/screens/tab_bar/page/tab_bar_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -183,7 +184,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       userEmail = _emailController.text;
                     }
                   }
-                  Navigator.pop(context, true);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => TabBarPage()),
+                      (route) => false);
                 },
               ),
             ]),
