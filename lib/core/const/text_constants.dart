@@ -78,23 +78,23 @@ class TextConstants {
 
   //Workout screen -> yoga card
   static const String yogaTitle = "Yoga";
-  static const String yogaExercises = "16";
-  static const String yogaMinutes = "52";
+  static const String yogaExercises = "3";
+  static const String yogaMinutes = "32";
 
   //Workout screen -> pilates card
   static const String pilatesTitle = "Pilates";
-  static const String pilatesExercises = "20";
-  static const String pilatesMinutes = "60";
+  static const String pilatesExercises = "3";
+  static const String pilatesMinutes = "32";
 
   //Workout screen -> fullBody card
   static const String fullBodyTitle = "Full body";
-  static const String fullBodyExercises = "14";
-  static const String fullBodyMinutes = "48";
+  static const String fullBodyExercises = "3";
+  static const String fullBodyMinutes = "32";
 
   //Workout screen -> stretching card
   static const String stretchingTitle = "Stretching";
-  static const String stretchingExercises = "8";
-  static const String stretchingMinutes = "35";
+  static const String stretchingExercises = "3";
+  static const String stretchingMinutes = "32";
 
   //Settings screen
   static const String joinUs = 'Join us in social media';
