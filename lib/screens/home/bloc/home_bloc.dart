@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:perfect_fitness/core/service/auth_service.dart';
@@ -34,7 +34,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
       yield ReloadImageState(photoURL: photoURL);
     } else if (event is ReloadDisplayNameEvent) {
-      final displayName = await UserStorageService.readSecureData('name');
+      final displayName = FirebaseAuth.instance.currentUser?.displayName;
       yield ReloadDisplayNameState(displayName: displayName);
     }
   }

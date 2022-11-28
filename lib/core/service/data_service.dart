@@ -3,16 +3,187 @@ import 'dart:convert';
 import 'package:perfect_fitness/core/const/global_constants.dart';
 import 'package:perfect_fitness/core/service/user_storage_service.dart';
 import 'package:perfect_fitness/data/workout_data.dart';
+import 'package:perfect_fitness/data/user_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:perfect_fitness/core/const/data_constants.dart';
+import 'package:perfect_fitness/core/const/path_constants.dart';
+import 'package:perfect_fitness/core/const/text_constants.dart';
+import 'package:perfect_fitness/data/exercise_data.dart';
+import 'package:perfect_fitness/data/workout_data.dart';
 
 class DataService {
   static Future<List<WorkoutData>> getWorkoutsForUser() async {
+    final currUser = FirebaseAuth.instance.currentUser;
+    GlobalConstants.currentUser = UserData.fromFirebase(currUser);
     final currUserEmail = GlobalConstants.currentUser?.mail;
 
     // await UserStorageService.deleteSecureData('${currUserEmail}Workouts');
 
     final workoutsStr =
         await UserStorageService.readSecureData('${currUserEmail}Workouts');
-    if (workoutsStr == null) return [];
+    if (workoutsStr == null) {
+      final List<WorkoutData> workoutsnull = [
+        WorkoutData(
+            id: 'workout1',
+            title: TextConstants.yogaTitle,
+            exercises: TextConstants.yogaExercises,
+            minutes: TextConstants.yogaMinutes,
+            currentProgress: 0,
+            progress: 3,
+            image: PathConstants.yoga,
+            exerciseDataList: [
+              ExerciseData(
+                id: 'exercise1',
+                title: TextConstants.reclining,
+                minutes: TextConstants.recliningMinutes,
+                progress: 0,
+                video: PathConstants.recliningVideo,
+                description: TextConstants.warriorDescription,
+                steps: [
+                  TextConstants.warriorStep1,
+                  TextConstants.warriorStep2,
+                  TextConstants.warriorStep1,
+                  TextConstants.warriorStep2,
+                  TextConstants.warriorStep1,
+                  TextConstants.warriorStep2,
+                ],
+              ),
+              ExerciseData(
+                id: 'exercise2',
+                title: TextConstants.cowPose,
+                minutes: TextConstants.cowPoseMinutes,
+                progress: 0,
+                video: PathConstants.cowPoseVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+              ExerciseData(
+                id: 'exercise3',
+                title: TextConstants.warriorPose,
+                minutes: TextConstants.warriorPoseMinutes,
+                progress: 0,
+                video: PathConstants.warriorIIVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+            ]),
+        WorkoutData(
+            id: 'workout2',
+            title: TextConstants.pilatesTitle,
+            exercises: TextConstants.pilatesExercises,
+            minutes: TextConstants.pilatesMinutes,
+            currentProgress: 0,
+            progress: 3,
+            image: PathConstants.pilates,
+            exerciseDataList: [
+              ExerciseData(
+                id: 'exercise1',
+                title: TextConstants.reclining,
+                minutes: TextConstants.recliningMinutes,
+                progress: 0.0,
+                video: PathConstants.recliningVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+              ExerciseData(
+                id: 'exercise1',
+                title: TextConstants.cowPose,
+                minutes: TextConstants.cowPoseMinutes,
+                progress: 0.0,
+                video: PathConstants.cowPoseVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+              ExerciseData(
+                id: 'exercise1',
+                title: TextConstants.warriorPose,
+                minutes: TextConstants.warriorPoseMinutes,
+                progress: 0.0,
+                video: PathConstants.warriorIIVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+            ]),
+        WorkoutData(
+            id: 'workout3',
+            title: TextConstants.fullBodyTitle,
+            exercises: TextConstants.fullBodyExercises,
+            minutes: TextConstants.fullBodyMinutes,
+            currentProgress: 0,
+            progress: 3,
+            image: PathConstants.fullBody,
+            exerciseDataList: [
+              ExerciseData(
+                id: 'exercise1',
+                title: TextConstants.reclining,
+                minutes: TextConstants.recliningMinutes,
+                progress: 0.0,
+                video: PathConstants.recliningVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+              ExerciseData(
+                id: 'exercise2',
+                title: TextConstants.cowPose,
+                minutes: TextConstants.cowPoseMinutes,
+                progress: 0.0,
+                video: PathConstants.cowPoseVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+              ExerciseData(
+                id: 'exercise3',
+                title: TextConstants.warriorPose,
+                minutes: TextConstants.warriorPoseMinutes,
+                progress: 0.0,
+                video: PathConstants.warriorIIVideo,
+                description: TextConstants.warriorDescription,
+                steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+              ),
+            ]),
+        WorkoutData(
+          id: 'workout4',
+          title: TextConstants.stretchingTitle,
+          exercises: TextConstants.stretchingExercises,
+          minutes: TextConstants.stretchingMinutes,
+          currentProgress: 0,
+          progress: 3,
+          image: PathConstants.stretching,
+          exerciseDataList: [
+            ExerciseData(
+              id: 'exercise1',
+              title: TextConstants.reclining,
+              minutes: TextConstants.recliningMinutes,
+              progress: 0.0,
+              video: PathConstants.recliningVideo,
+              description: TextConstants.warriorDescription,
+              steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+            ),
+            ExerciseData(
+              id: 'exercise2',
+              title: TextConstants.cowPose,
+              minutes: TextConstants.cowPoseMinutes,
+              progress: 0.0,
+              video: PathConstants.cowPoseVideo,
+              description: TextConstants.warriorDescription,
+              steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+            ),
+            ExerciseData(
+              id: 'exercise3',
+              title: TextConstants.warriorPose,
+              minutes: TextConstants.warriorPoseMinutes,
+              progress: 0.0,
+              video: PathConstants.warriorIIVideo,
+              description: TextConstants.warriorDescription,
+              steps: [TextConstants.warriorStep1, TextConstants.warriorStep2],
+            ),
+          ],
+        ),
+      ];
+      GlobalConstants.workouts = workoutsnull;
+      return workoutsnull;
+    }
+    ;
     final decoded = (json.decode(workoutsStr) as List?) ?? [];
     final workouts = decoded.map((e) {
       final decodedE = json.decode(e) as Map<String, dynamic>?;

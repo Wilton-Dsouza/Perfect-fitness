@@ -5,6 +5,9 @@ import 'package:perfect_fitness/screens/sign_up/page/sign_up_page.dart';
 import 'package:perfect_fitness/screens/tab_bar/page/tab_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perfect_fitness/data/user_data.dart';
+import 'package:perfect_fitness/core/const/global_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -37,8 +40,11 @@ class SignInPage extends StatelessWidget {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (_) => SignUpPage()));
           } else if (state is NextTabBarPageState) {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => TabBarPage()));
+            // Navigator.of(context).pushReplacement(
+            //     MaterialPageRoute(builder: (_) => TabBarPage()));
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (_) => TabBarPage()),
+                (route) => false);
           } else if (state is ErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),

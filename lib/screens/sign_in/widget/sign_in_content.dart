@@ -7,6 +7,9 @@ import 'package:perfect_fitness/screens/common_widgets/fitness_text_field.dart';
 import 'package:perfect_fitness/screens/sign_in/bloc/sign_in_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:perfect_fitness/data/user_data.dart';
+import 'package:perfect_fitness/core/const/global_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

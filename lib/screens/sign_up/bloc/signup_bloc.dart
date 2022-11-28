@@ -4,6 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:perfect_fitness/core/service/auth_service.dart';
 import 'package:perfect_fitness/core/service/validation_service.dart';
 import 'package:flutter/material.dart';
+import 'package:perfect_fitness/data/user_data.dart';
+import 'package:perfect_fitness/core/const/global_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
 part 'signup_event.dart';
@@ -34,6 +37,8 @@ class SignUpBloc extends Bloc<SignupEvent, SignUpState> {
           yield LoadingState();
           await AuthService.signUp(emailController.text,
               passwordController.text, userNameController.text);
+          final currUser = FirebaseAuth.instance.currentUser;
+          GlobalConstants.currentUser = UserData.fromFirebase(currUser);
           yield NextTabBarPageState();
           print("Go to the next page");
         } catch (e) {

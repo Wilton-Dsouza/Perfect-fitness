@@ -6,7 +6,8 @@ import 'package:meta/meta.dart';
 import 'package:perfect_fitness/core/const/data_constants.dart';
 import 'package:perfect_fitness/core/service/data_service.dart';
 import 'package:perfect_fitness/core/const/global_constants.dart';
-
+import 'package:perfect_fitness/data/user_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 part 'workouts_event.dart';
 part 'workouts_state.dart';
 
@@ -19,7 +20,12 @@ class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
   Stream<WorkoutsState> mapEventToState(
     WorkoutsEvent event,
   ) async* {
+    List<WorkoutData> workouts1 = DataConstants.workouts;
+    final currUser = FirebaseAuth.instance.currentUser;
+    GlobalConstants.currentUser = UserData.fromFirebase(currUser);
     if (event is WorkoutsInitialEvent) {
+      final currUser = FirebaseAuth.instance.currentUser;
+      GlobalConstants.currentUser = UserData.fromFirebase(currUser);
       GlobalConstants.workouts = await DataService.getWorkoutsForUser();
       for (int i = 0; i < workouts.length; i++) {
         final workoutsUserIndex =
