@@ -27,7 +27,7 @@ class HomeStatistics extends StatelessWidget {
   Widget _createComletedWorkouts(BuildContext context, HomeBloc bloc) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(5),
       height: 200,
       width: screenWidth * 0.35,
       decoration: BoxDecoration(

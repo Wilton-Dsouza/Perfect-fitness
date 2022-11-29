@@ -97,78 +97,78 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Text(displayName,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             SizedBox(height: 15),
-            SettingsContainer(
-              child: Text(TextConstants.reminder,
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
-              withArrow: true,
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => ReminderPage()));
-              },
-            ),
+            // SettingsContainer(
+            //   child: Text(TextConstants.reminder,
+            //       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
+            //   withArrow: true,
+            //   onTap: () {
+            //     Navigator.push(
+            //         context, MaterialPageRoute(builder: (_) => ReminderPage()));
+            //   },
+            // ),
             if (!kIsWeb)
+              //   SettingsContainer(
+              //     child: Text(
+              //         TextConstants.rateUsOn +
+              //             '${Platform.isIOS ? 'App store' : 'Play market'}',
+              //         style:
+              //             TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
+              //     onTap: () {
+              //       return launch(Platform.isIOS
+              //           ? 'https://www.apple.com/app-store/'
+              //           : 'https://play.google.com/store');
+              //     },
+              //   ),
+              // SettingsContainer(
+              //     onTap: () => launch('https://perpet.io/'),
+              //     child: Text(TextConstants.terms,
+              //         style:
+              //             TextStyle(fontSize: 17, fontWeight: FontWeight.w500))),
               SettingsContainer(
-                child: Text(
-                    TextConstants.rateUsOn +
-                        '${Platform.isIOS ? 'App store' : 'Play market'}',
-                    style:
-                        TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
-                onTap: () {
-                  return launch(Platform.isIOS
-                      ? 'https://www.apple.com/app-store/'
-                      : 'https://play.google.com/store');
-                },
-              ),
-            SettingsContainer(
-                onTap: () => launch('https://perpet.io/'),
-                child: Text(TextConstants.terms,
-                    style:
-                        TextStyle(fontSize: 17, fontWeight: FontWeight.w500))),
-            SettingsContainer(
-                child: Text(TextConstants.signOut,
-                    style:
-                        TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
-                onTap: () {
-                  AuthService.signOut();
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(builder: (_) => SignInPage()),
-                  // );
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => SignInPage()));
-                }),
+                  child: Text(TextConstants.signOut,
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
+                  onTap: () {
+                    AuthService.signOut();
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(builder: (_) => SignInPage()),
+                    // );
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => SignInPage()));
+                  }),
             SizedBox(height: 15),
-            Text(TextConstants.joinUs,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    onPressed: () =>
-                        launch('https://www.facebook.com/perpetio/'),
-                    style: TextButton.styleFrom(
-                        shape: CircleBorder(),
-                        backgroundColor: Colors.white,
-                        elevation: 1),
-                    child: Image.asset(PathConstants.facebook)),
-                TextButton(
-                    onPressed: () =>
-                        launch('https://www.instagram.com/perpetio/'),
-                    style: TextButton.styleFrom(
-                        shape: CircleBorder(),
-                        backgroundColor: Colors.white,
-                        elevation: 1),
-                    child: Image.asset(PathConstants.instagram)),
-                TextButton(
-                    onPressed: () => launch('https://twitter.com/perpetio'),
-                    style: TextButton.styleFrom(
-                        shape: CircleBorder(),
-                        backgroundColor: Colors.white,
-                        elevation: 1),
-                    child: Image.asset(PathConstants.twitter)),
-              ],
-            )
+            // Text(TextConstants.joinUs,
+            //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            // SizedBox(height: 15),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     TextButton(
+            //         onPressed: () =>
+            //             launch('https://www.facebook.com/perpetio/'),
+            //         style: TextButton.styleFrom(
+            //             shape: CircleBorder(),
+            //             backgroundColor: Colors.white,
+            //             elevation: 1),
+            //         child: Image.asset(PathConstants.facebook)),
+            //     TextButton(
+            //         onPressed: () =>
+            //             launch('https://www.instagram.com/perpetio/'),
+            //         style: TextButton.styleFrom(
+            //             shape: CircleBorder(),
+            //             backgroundColor: Colors.white,
+            //             elevation: 1),
+            //         child: Image.asset(PathConstants.instagram)),
+            //     TextButton(
+            //         onPressed: () => launch('https://twitter.com/perpetio'),
+            //         style: TextButton.styleFrom(
+            //             shape: CircleBorder(),
+            //             backgroundColor: Colors.white,
+            //             elevation: 1),
+            //         child: Image.asset(PathConstants.twitter)),
+            //   ],
+            // )
           ]),
         ),
       ),
