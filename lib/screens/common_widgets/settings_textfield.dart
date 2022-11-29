@@ -6,13 +6,15 @@ class SettingsTextField extends StatefulWidget {
   final TextEditingController controller;
   final bool obscureText;
   final String placeHolder;
+  final bool enabled;
 
-  const SettingsTextField({
-    Key? key,
-    required this.controller,
-    this.obscureText = false,
-    required this.placeHolder,
-  }) : super(key: key);
+  const SettingsTextField(
+      {Key? key,
+      required this.controller,
+      this.obscureText = false,
+      required this.placeHolder,
+      required this.enabled})
+      : super(key: key);
 
   @override
   _SettingsTextFieldState createState() => _SettingsTextFieldState();

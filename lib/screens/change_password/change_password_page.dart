@@ -98,6 +98,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   style: TextStyle(fontWeight: FontWeight.w600)),
               SettingsContainer(
                 child: SettingsTextField(
+                  enabled: true,
                   controller: _newPassController,
                   obscureText: true,
                   placeHolder: TextConstants.passwordPlaceholder,
@@ -111,6 +112,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   style: TextStyle(fontWeight: FontWeight.w600)),
               SettingsContainer(
                 child: SettingsTextField(
+                  enabled: true,
                   controller: _confirmPassController,
                   obscureText: true,
                   placeHolder: TextConstants.confirmPasswordPlaceholder,
