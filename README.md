@@ -1,4 +1,4 @@
-# perfect_fitness
+# Perfect Fitness
 
 A new Flutter project.
 
