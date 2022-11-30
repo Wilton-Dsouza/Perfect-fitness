@@ -136,12 +136,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   style: TextStyle(fontWeight: FontWeight.w600)),
               SettingsContainer(
                   child: TextField(
-                decoration: InputDecoration(
-                  hintText: TextConstants.emailPlaceholder,
-                  hintStyle: TextStyle(fontWeight: FontWeight.w600),
-                ),
+                decoration: InputDecoration(border: InputBorder.none),
                 enabled: false,
                 controller: _emailController,
+                style: TextStyle(fontWeight: FontWeight.w600),
               )),
               if (isEmailInvalid)
                 Text(TextConstants.emailErrorText,

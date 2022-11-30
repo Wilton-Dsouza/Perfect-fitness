@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:perfect_fitness/data/workout_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:perfect_fitness/screens/common_widgets/settings_container.dart';
+import 'package:perfect_fitness/screens/common_widgets/settings_textfield.dart';
 import 'package:perfect_fitness/core/const/color_constants.dart';
 import 'package:perfect_fitness/core/const/path_constants.dart';
 import 'package:perfect_fitness/core/const/text_constants.dart';
@@ -25,7 +27,25 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final User? user = FirebaseAuth.instance.currentUser;
+  bool isNameInvalid = false;
+  bool isEmailInvalid = false;
   String? photoUrl;
+  late String userName;
+  late String userEmail;
+
+  @override
+  void initState() {
+    userName = user?.displayName ?? "No Username";
+    userEmail = user?.email ?? 'No email';
+    photoUrl = user?.photoURL ?? null;
+    _nameController.text = userName;
+    _emailController.text = userEmail;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: _buildContext(context));
@@ -58,7 +78,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-          child: Column(children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Stack(alignment: Alignment.topRight, children: [
               Center(
                 child: photoUrl == null
@@ -94,8 +115,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Icon(Icons.edit, color: ColorConstants.primaryColor)),
             ]),
             SizedBox(height: 15),
-            Text(displayName,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(displayName,
+                    style:
+                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              ],
+            ),
+
             SizedBox(height: 15),
             // SettingsContainer(
             //   child: Text(TextConstants.reminder,
@@ -124,19 +152,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
               //     child: Text(TextConstants.terms,
               //         style:
               //             TextStyle(fontSize: 17, fontWeight: FontWeight.w500))),
-              SettingsContainer(
-                  child: Text(TextConstants.signOut,
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
-                  onTap: () {
-                    AuthService.signOut();
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(builder: (_) => SignInPage()),
-                    // );
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (_) => SignInPage()));
-                  }),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 40),
+                  Text(
+                    TextConstants.fullName,
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  SettingsContainer(
+                      child: TextField(
+                    decoration: InputDecoration(border: InputBorder.none),
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                    enabled: false,
+                    controller: _nameController,
+                  )),
+                  if (isNameInvalid)
+                    Text(TextConstants.nameShouldContain2Char,
+                        style: TextStyle(color: ColorConstants.errorColor)),
+                  Text(TextConstants.email,
+                      style: TextStyle(fontWeight: FontWeight.w600)),
+                  SettingsContainer(
+                      child: TextField(
+                    decoration: InputDecoration(border: InputBorder.none),
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                    enabled: false,
+                    controller: _emailController,
+                  )),
+                  if (isEmailInvalid)
+                    Text(TextConstants.emailErrorText,
+                        style: TextStyle(color: ColorConstants.errorColor)),
+                  SizedBox(height: 15),
+                ],
+              ),
+            SettingsContainer(
+                child: Text(TextConstants.signOut,
+                    style:
+                        TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
+                onTap: () {
+                  AuthService.signOut();
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(builder: (_) => SignInPage()),
+                  // );
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => SignInPage()));
+                }),
             SizedBox(height: 15),
             // Text(TextConstants.joinUs,
             //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),

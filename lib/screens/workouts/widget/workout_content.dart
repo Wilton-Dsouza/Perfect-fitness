@@ -56,28 +56,29 @@ class _WorkoutContent extends State<WorkoutContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Text(
               TextConstants.workouts,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(height: 5),
-          Container(
-              padding: const EdgeInsets.only(top: 5),
+          const SizedBox(height: 10),
+          Flexible(
+              // padding: const EdgeInsets.only(top: 5),
               child: RefreshIndicator(
-                onRefresh: () {
-                  setState(() {
-                    workouts = DataConstants.workouts;
-                  });
-                  return Future<void>.delayed(Duration(seconds: 0));
-                },
-                child: ListView(
-                  shrinkWrap: true,
-                  children:
-                      bloc.workouts.map((e) => _createWorkoutCard(e)).toList(),
-                ),
-              )),
+            onRefresh: () {
+              setState(() {
+                workouts = DataConstants.workouts;
+              });
+              return Future<void>.delayed(Duration(seconds: 0));
+            },
+            child: ListView(
+              shrinkWrap: true,
+              children:
+                  bloc.workouts.map((e) => _createWorkoutCard(e)).toList(),
+            ),
+          )),
         ],
       ),
     );

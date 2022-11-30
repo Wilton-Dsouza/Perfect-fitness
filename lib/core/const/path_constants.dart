@@ -37,6 +37,24 @@ class PathConstants {
   static const String fullBody = 'assets/icons/workouts/full_body.png';
   static const String stretching = 'assets/icons/workouts/stretching.png';
 
+  static const String yogawarm = 'assets/images/exercises/Yoga_warm.png';
+  static const String warriorpose2 =
+      'assets/images/exercises/Warrior-2-pose.png';
+  static const String cowpose = 'assets/images/exercises/Cow_Pose.png';
+
+  static const String breathing = 'assets/images/exercises/Breathing.png';
+  static const String leftlift = 'assets/images/exercises/leglift.png';
+  static const String shoulderbridge =
+      'assets/images/exercises/Shoulder-bridge.png';
+
+  static const String plank = 'assets/images/exercises/Plank.png';
+  static const String burpee = 'assets/images/exercises/Burpee.png';
+  static const String thrusters = 'assets/images/exercises/Thrusters.png';
+
+  static const String quad = 'assets/images/exercises/Quad_stretch.png';
+  static const String sidestretch = 'assets/images/exercises/Side Stretch.png';
+  static const String hamString = 'assets/images/exercises/HamStretch.png';
+
   //social networks
   static const String facebook = 'assets/icons/social_networks/facebook.png';
   static const String instagram = 'assets/icons/social_networks/instagram.png';

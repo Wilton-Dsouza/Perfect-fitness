@@ -7,6 +7,7 @@ class ExerciseData {
   double? progress;
   String? video;
   String? description;
+  String? image;
   List<String>? steps;
 
   ExerciseData({
@@ -14,6 +15,7 @@ class ExerciseData {
     required this.title,
     required this.minutes,
     required this.progress,
+    required this.image,
     required this.video,
     required this.description,
     required this.steps,
@@ -24,6 +26,7 @@ class ExerciseData {
     title = json['title'];
     minutes = json['minutes'];
     progress = json['progress'];
+    image = json['image'];
     video = json['video'];
     description = json['description'];
     steps = json['steps'].cast<String>();
@@ -35,6 +38,7 @@ class ExerciseData {
     data['title'] = this.title;
     data['minutes'] = this.minutes;
     data['progress'] = this.progress;
+    data['image'] = this.image;
     data['video'] = this.video;
     data['description'] = this.description;
     data['steps'] = this.steps;
