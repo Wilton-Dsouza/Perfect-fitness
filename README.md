@@ -1,6 +1,6 @@
 # Perfect Fitness
 
-A new Flutter project.
+An interactive application which provides daily workout routines based on your individual needs and this app is for those who want to start a new active lifestyle, build healthy habits and feel amazing
 
 ## Getting Started
 
